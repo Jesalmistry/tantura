@@ -23,7 +23,7 @@ import {
 } from "lucide-react";
 
 export default function AdminPage() {
-  const { designRequests, updateDesignStatus } = useApp();
+  const { user, designRequests, updateDesignStatus } = useApp();
   
   // Local state for editing request details
   const [editingId, setEditingId] = useState<string | null>(null);
@@ -67,6 +67,54 @@ export default function AdminPage() {
         return "bg-card-border text-foreground/60";
     }
   };
+
+  const isAuthorized = user && user.role === "admin";
+
+  if (!isAuthorized) {
+    return (
+      <>
+        <Navbar />
+
+        <main className="flex-grow select-none bg-[#0A0A0A] pb-20 relative flex items-center justify-center min-h-[75vh]">
+          {/* Ambient gold glow */}
+          <div className="absolute top-20 left-1/2 -translate-x-1/2 w-[800px] h-[300px] bg-gold/5 blur-[120px] rounded-full pointer-events-none" />
+
+          <section className="relative z-10 max-w-md mx-auto px-6 py-12 text-center space-y-8 glass rounded-3xl border border-card-border shadow-2xl">
+            <div className="flex flex-col items-center space-y-4">
+              <div className="p-4 bg-red-500/10 border border-red-500/30 rounded-2xl w-fit">
+                <X className="w-10 h-10 text-red-500" />
+              </div>
+              <h2 className="text-2xl font-light uppercase tracking-widest text-foreground text-gold-shine">
+                Access Denied
+              </h2>
+              <div className="h-[1px] bg-card-border w-24 mx-auto" />
+            </div>
+
+            <p className="text-xs text-foreground/70 font-light leading-relaxed">
+              The Tantura Admin Control Center is restricted to authorized personnel only. You must be authenticated as an Administrator to manage design pipelines and upload quotes.
+            </p>
+
+            <div className="p-4 rounded-2xl border border-card-border bg-[#0D0D0D] text-[10px] font-mono text-foreground/50 space-y-1.5 max-w-[280px] mx-auto">
+              <span className="block text-gold/80 font-bold uppercase tracking-wider">Authorized Demo login</span>
+              <p>Email: <span className="text-white">admin@ajstudio.com</span></p>
+              <p className="italic">(Any password hash accepted)</p>
+            </div>
+
+            <div className="flex flex-col gap-3 pt-2">
+              <a 
+                href="/"
+                className="flex items-center justify-center gap-2 w-full py-3 rounded-full border border-card-border text-xs uppercase tracking-widest font-bold text-foreground hover:bg-card-border transition-all cursor-pointer"
+              >
+                Return to Customizer
+              </a>
+            </div>
+          </section>
+        </main>
+
+        <Footer />
+      </>
+    );
+  }
 
   return (
     <>
