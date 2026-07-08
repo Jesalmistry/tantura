@@ -55,7 +55,7 @@ export default function Home() {
               opacity: 0,
               transition: { duration: 0.95, ease: [0.76, 0, 0.24, 1] } 
             }}
-            className="fixed inset-0 bg-[#0A0A0A] z-[9999] flex flex-col items-center justify-center select-none overflow-hidden"
+            className="fixed inset-0 h-[100dvh] w-screen bg-[#0A0A0A] z-[9999] flex flex-col items-center justify-center select-none overflow-hidden"
           >
             {/* Fine Drafting Grid backdrop shifting and fading */}
             <motion.div
@@ -73,14 +73,14 @@ export default function Home() {
             {/* Glowing gold backlight */}
             <div className="absolute w-[500px] h-[500px] bg-gold/5 blur-[150px] rounded-full pointer-events-none" />
 
-            <div className="flex flex-col items-center max-w-md px-6 text-center space-y-10 relative z-10">
+            <div className="flex flex-col items-center max-w-md px-6 text-center space-y-6 sm:space-y-10 relative z-10">
               
               {/* Spinning tailored drafting stitches circular overlay */}
               <div className="relative flex items-center justify-center">
                 <motion.div 
                   animate={{ rotate: -360 }}
                   transition={{ repeat: Infinity, duration: 8, ease: "linear" }}
-                  className="absolute w-[170px] h-[170px] rounded-full border border-dashed border-gold/25"
+                  className="absolute w-[130px] h-[130px] sm:w-[170px] sm:h-[170px] rounded-full border border-dashed border-gold/25"
                 />
                 
                 {/* Logo Frame: Luxury Gold Squircle Badge */}
@@ -88,25 +88,25 @@ export default function Home() {
                   initial={{ scale: 0.6, rotate: -15, opacity: 0 }}
                   animate={{ scale: 1, rotate: 0, opacity: 1 }}
                   transition={{ type: "spring", stiffness: 40, damping: 12, delay: 0.2 }}
-                  className="w-36 h-36 rounded-[28px] border border-gold p-1 bg-luxury-black overflow-hidden shadow-[0_0_60px_rgba(212,175,55,0.18)] flex items-center justify-center relative group"
+                  className="w-28 h-28 sm:w-36 sm:h-36 rounded-[22px] sm:rounded-[28px] border border-gold p-1 bg-luxury-black overflow-hidden shadow-[0_0_60px_rgba(212,175,55,0.18)] flex items-center justify-center relative group"
                 >
                   <img
                     src="/logo.jpg"
                     alt="Tantura Premium Logo"
-                    className="w-full h-full object-cover rounded-[22px]"
+                    className="w-full h-full object-cover rounded-[16px] sm:rounded-[22px]"
                   />
                   {/* Subtle inner gold frame highlight */}
-                  <div className="absolute inset-2 border border-gold/10 rounded-[20px] pointer-events-none" />
+                  <div className="absolute inset-2 border border-gold/10 rounded-[14px] sm:rounded-[20px] pointer-events-none" />
                 </motion.div>
               </div>
 
               {/* Title and details */}
-              <div className="space-y-4">
+              <div className="space-y-3.5">
                 <motion.h2
-                  initial={{ letterSpacing: "1.2em", opacity: 0 }}
+                  initial={{ letterSpacing: "0.8em", opacity: 0 }}
                   animate={{ letterSpacing: "0.22em", opacity: 1 }}
-                  transition={{ duration: 2, ease: [0.16, 1, 0.3, 1] }}
-                  className="text-4xl font-serif font-light text-gold-shine tracking-[0.22em] uppercase"
+                  transition={{ duration: 1.8, ease: [0.16, 1, 0.3, 1] }}
+                  className="text-3xl sm:text-4xl font-serif font-light text-gold-shine tracking-[0.22em] uppercase"
                 >
                   TANTURA
                 </motion.h2>
@@ -114,7 +114,7 @@ export default function Home() {
                 {/* Animated sewing stitch separator */}
                 <motion.div
                   initial={{ width: 0, opacity: 0 }}
-                  animate={{ width: "120px", opacity: 0.35 }}
+                  animate={{ width: "100px", opacity: 0.35 }}
                   transition={{ duration: 1, delay: 0.6 }}
                   className="h-[1px] bg-gold/50 mx-auto"
                   style={{

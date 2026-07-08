@@ -28,9 +28,11 @@ export default function RootLayout({
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col bg-background text-foreground selection:bg-gold selection:text-luxury-black transition-colors duration-500">
+      <body className="min-h-full flex flex-col bg-[#0A0A0A] text-foreground selection:bg-gold selection:text-luxury-black transition-colors duration-500">
         <AppProvider>
-          {children}
+          <div className="flex flex-col min-h-screen w-full overflow-x-hidden relative">
+            {children}
+          </div>
         </AppProvider>
       </body>
     </html>

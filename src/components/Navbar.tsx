@@ -18,7 +18,8 @@ import {
   ChevronRight, 
   FileText,
   CheckCircle,
-  HelpCircle
+  HelpCircle,
+  Menu
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -28,6 +29,7 @@ export const Navbar: React.FC = () => {
   // Drawer & Auth State
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [authMode, setAuthMode] = useState<"login" | "register">("login");
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   
   // Form inputs
   const [loginEmail, setLoginEmail] = useState("");
@@ -113,22 +115,9 @@ export const Navbar: React.FC = () => {
             </Link>
           </nav>
 
-          {/* Controls (Theme & Auth trigger) */}
-          <div className="flex items-center gap-3 text-foreground">
+          {/* Controls (Auth trigger & Mobile Menu) */}
+          <div className="flex items-center gap-2.5 text-foreground">
             
-            {/* Theme Toggle */}
-            <button 
-              onClick={toggleTheme} 
-              className="p-2.5 rounded-full hover:bg-card-border transition-colors duration-200 cursor-pointer border border-card-border"
-              aria-label="Toggle Theme"
-            >
-              {theme === "light" ? (
-                <Moon className="w-4 h-4 text-luxury-black" />
-              ) : (
-                <Sun className="w-4 h-4 text-gold" />
-              )}
-            </button>
-
             {/* Auth Drawer Toggle Button */}
             {user ? (
               <button
@@ -136,7 +125,7 @@ export const Navbar: React.FC = () => {
                 className="flex items-center gap-2 px-4 py-2 rounded-full hover:bg-card-border transition-all duration-200 border border-gold/30 text-gold cursor-pointer text-xs font-semibold uppercase tracking-wider bg-gold-light/5"
               >
                 <User className="w-3.5 h-3.5" />
-                <span className="max-w-[100px] truncate">{user.name.split(" ")[0]}</span>
+                <span className="max-w-[80px] sm:max-w-[100px] truncate">{user.name.split(" ")[0]}</span>
               </button>
             ) : (
               <button
@@ -148,8 +137,57 @@ export const Navbar: React.FC = () => {
               </button>
             )}
 
+            {/* Mobile Navigation Hamburger Button */}
+            <button
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              className="md:hidden p-2 rounded-full border border-card-border hover:border-gold hover:text-gold cursor-pointer transition-all text-foreground"
+              aria-label="Toggle Mobile Menu"
+            >
+              {isMobileMenuOpen ? <X className="w-4 h-4" /> : <Menu className="w-4 h-4" />}
+            </button>
+
           </div>
         </div>
+
+        {/* Mobile Menu Panel Dropdown */}
+        <AnimatePresence>
+          {isMobileMenuOpen && (
+            <motion.div
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: "auto" }}
+              exit={{ opacity: 0, height: 0 }}
+              transition={{ duration: 0.25, ease: "easeInOut" }}
+              className="md:hidden border-t border-card-border bg-[#0A0A0A] overflow-hidden"
+            >
+              <div className="px-6 py-4 flex flex-col gap-3.5 text-xs uppercase tracking-widest font-mono font-bold text-foreground">
+                <Link 
+                  href="/" 
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="hover:text-gold transition-colors py-2 flex items-center justify-between border-b border-card-border/40 text-gold-shine"
+                >
+                  <span>Customizer Studio</span>
+                  <ChevronRight className="w-3.5 h-3.5" />
+                </Link>
+                <Link 
+                  href="/about" 
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="hover:text-gold transition-colors py-2 flex items-center justify-between border-b border-card-border/40"
+                >
+                  <span>About Us</span>
+                  <ChevronRight className="w-3.5 h-3.5 text-gold" />
+                </Link>
+                <Link 
+                  href="/admin" 
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="hover:text-gold transition-colors py-2 flex items-center justify-between"
+                >
+                  <span>Admin Center</span>
+                  <ChevronRight className="w-3.5 h-3.5 text-gold" />
+                </Link>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </header>
 
       {/* Slide-over Drawer Portal */}
