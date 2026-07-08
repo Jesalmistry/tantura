@@ -289,7 +289,7 @@ export const LiveCanvasEditor: React.FC<LiveCanvasEditorProps> = ({ onSubmit }) 
       
       {/* LEFT: Premium 2D Live Visualizer Canvas */}
       <div className="lg:col-span-7 flex flex-col items-center">
-        <div className="w-full glass rounded-3xl p-6 relative flex flex-col items-center border border-card-border overflow-hidden h-full min-h-[500px] justify-between">
+        <div className="w-full glass rounded-3xl p-4 sm:p-6 relative flex flex-col items-center border border-card-border overflow-hidden h-full min-h-[440px] sm:min-h-[500px] justify-between">
           
           {/* Canvas Header Controls */}
           <div className="w-full flex justify-between items-center mb-4 z-10">
@@ -515,7 +515,7 @@ export const LiveCanvasEditor: React.FC<LiveCanvasEditorProps> = ({ onSubmit }) 
 
       {/* RIGHT: Dynamic Configurator Tool & Checkout Wizard */}
       <div className="lg:col-span-5 flex flex-col">
-        <div className="w-full glass rounded-3xl p-6 border border-card-border flex flex-col justify-between h-full">
+        <div className="w-full glass rounded-3xl p-4 sm:p-6 border border-card-border flex flex-col justify-between h-full">
           
           {/* Configurator Navigation Tabs */}
           <div className="flex gap-1 overflow-x-auto pb-2 border-b border-card-border mb-6 scrollbar-none">
