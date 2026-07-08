@@ -1,26 +1,201 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #0A0A0A; /* Luxury Dark Pitch */
+  --foreground: #FFFFFF; /* Pure White */
+  --card-bg: rgba(30, 30, 30, 0.45);
+  --card-border: rgba(255, 255, 255, 0.06);
+  --card-hover: rgba(40, 40, 40, 0.65);
+  --gold: #D4AF37;
+  --gold-hover: #EBC343;
+  --gold-light: rgba(212, 175, 55, 0.2);
+  --luxury-gray: #1E1E1E;
+  --luxury-light-gray: #333333;
+  --glass-shadow: rgba(0, 0, 0, 0.4);
 }
 
-@theme inline {
+.dark {
+  --background: #0B0B0B; /* Luxury Dark Pitch */
+  --foreground: #FFFFFF; /* Pure White */
+  --card-bg: rgba(30, 30, 30, 0.45);
+  --card-border: rgba(255, 255, 255, 0.06);
+  --card-hover: rgba(40, 40, 40, 0.65);
+  --gold: #D4AF37;
+  --gold-hover: #EBC343;
+  --gold-light: rgba(212, 175, 55, 0.2);
+  --luxury-gray: #1E1E1E;
+  --luxury-light-gray: #333333;
+  --glass-shadow: rgba(0, 0, 0, 0.4);
+}
+
+@theme {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-gold: var(--gold);
+  --color-gold-hover: var(--gold-hover);
+  --color-gold-light: var(--gold-light);
+  --color-luxury-black: #111111;
+  --color-luxury-gray: var(--luxury-gray);
+  --color-luxury-light-gray: var(--luxury-light-gray);
+  --color-soft-beige: #F5F1EB;
+  --color-card-bg: var(--card-bg);
+  --color-card-border: var(--card-border);
+  --color-card-hover: var(--card-hover);
+  --shadow-glass: var(--glass-shadow);
+  
+  --animate-fade-in-up: fade-in-up 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  --animate-pulse-slow: pulse-slow 3s infinite;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 
-body {
+@keyframes pulse-slow {
+  0%, 100% {
+    opacity: 0.15;
+  }
+  50% {
+    opacity: 0.3;
+  }
+}
+
+/* Glassmorphism Styles */
+.glass {
+  background: var(--card-bg);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--card-border);
+  box-shadow: 0 8px 32px 0 var(--glass-shadow);
+}
+
+.glass-card {
+  background: var(--card-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--card-border);
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.glass-card:hover {
+  background: var(--card-hover);
+  border-color: var(--gold);
+  box-shadow: 0 12px 40px 0 rgba(212, 175, 55, 0.15);
+  transform: translateY(-4px);
+}
+
+/* Scrollbar Customization */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
   background: var(--background);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--card-border);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--gold);
+}
+
+/* Base Body Styles with custom grid and gold radial light representing drafting & tailoring */
+body {
+  background-color: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  overflow-x: hidden;
+  transition: background-color 0.5s ease, color 0.3s ease;
+  background-image: 
+    radial-gradient(circle at 50% 50%, rgba(212, 175, 55, 0.03) 0%, transparent 75%),
+    linear-gradient(to right, rgba(255, 255, 255, 0.008) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.008) 1px, transparent 1px);
+  background-size: 100% 100%, 45px 45px, 45px 45px;
+}
+
+/* Sewing dashed stitch lines */
+.divider-sew {
+  height: 1px;
+  background-image: linear-gradient(to right, rgba(212, 175, 55, 0.25) 60%, transparent 40%);
+  background-size: 9px 1px;
+  border: none;
+  width: 100%;
+}
+
+/* Gold Text Selection */
+::selection {
+  background-color: var(--gold);
+  color: #111111;
+}
+
+/* Premium Typography Utilities */
+.text-luxury-headline {
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+.text-gold-gradient {
+  background: linear-gradient(135deg, #FFF 30%, #D4AF37 70%, #FFF 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.dark .text-gold-gradient {
+  background: linear-gradient(135deg, #FFF 20%, #D4AF37 50%, #B5932F 80%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+@keyframes text-shine {
+  0% {
+    background-position: -200% center;
+  }
+  100% {
+    background-position: 200% center;
+  }
+}
+
+.text-gold-shine {
+  background: linear-gradient(
+    to right,
+    #ffffff 20%,
+    #D4AF37 40%,
+    #fff8dc 50%,
+    #D4AF37 60%,
+    #ffffff 80%
+  );
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: text-shine 5s linear infinite;
+  display: inline-block;
+}
+
+.dark .text-gold-shine {
+  background: linear-gradient(
+    to right,
+    #ffffff 15%,
+    #D4AF37 35%,
+    #fffae6 50%,
+    #D4AF37 65%,
+    #ffffff 85%
+  );
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: text-shine 5s linear infinite;
+  display: inline-block;
 }
