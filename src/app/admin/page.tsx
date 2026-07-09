@@ -9,7 +9,7 @@ import {
   Sparkles, 
   Settings, 
   FileText, 
-  DollarSign, 
+  IndianRupee, 
   Check, 
   Layers, 
   Cpu, 
@@ -152,7 +152,7 @@ export default function AdminPage() {
               { label: "Total Uploads", val: totalRequests, icon: <FileText className="w-5 h-5 text-gold" /> },
               { label: "In Review Queue", val: inReviewRequests, icon: <Clock className="w-5 h-5 text-yellow-500 animate-pulse" /> },
               { label: "Active Production", val: inProductionRequests, icon: <Cpu className="w-5 h-5 text-orange-400" /> },
-              { label: "Pricing Forecast", val: `$${totalRevenue.toFixed(2)}`, icon: <DollarSign className="w-5 h-5 text-green-500" /> }
+              { label: "Pricing Forecast", val: `₹${totalRevenue.toLocaleString('en-IN')}`, icon: <IndianRupee className="w-5 h-5 text-green-500" /> }
             ].map((stat, idx) => (
               <div 
                 key={stat.label}
@@ -273,7 +273,7 @@ export default function AdminPage() {
                           <td className="p-5 font-mono">
                             {isEditing ? (
                               <div className="relative w-24">
-                                <span className="absolute left-2.5 top-2.5 text-foreground/50">$</span>
+                                <span className="absolute left-2.5 top-2.5 text-foreground/50">₹</span>
                                 <input
                                   type="number"
                                   value={editPrice}
@@ -283,7 +283,7 @@ export default function AdminPage() {
                               </div>
                             ) : (
                               <span className="font-bold text-foreground">
-                                {req.price ? `$${req.price.toFixed(2)}` : "Pending Quote"}
+                                {req.price ? `₹${req.price.toLocaleString('en-IN')}` : "Pending Quote"}
                               </span>
                             )}
                           </td>

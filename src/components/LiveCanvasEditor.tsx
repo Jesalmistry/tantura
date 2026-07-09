@@ -60,9 +60,9 @@ const TEXT_COLORS = [
 
 const FINISH_METHODS = [
   { id: "screen", name: "Vintage Screen Print", surcharge: 0, desc: "Classic soft-hand discharge ink flat finish" },
-  { id: "puff", name: "3D High-Density Puff Print", surcharge: 5.00, desc: "Raised tactile ink for premium streetwear depth" },
-  { id: "embroidered", name: "Tailored Satin Embroidery", surcharge: 7.50, desc: "High-density satin stitching with metallic threads" },
-  { id: "dtg", name: "High-Res Direct Graphic (DTG)", surcharge: 2.00, desc: "Full-color photo-realistic ink fusion" }
+  { id: "puff", name: "3D High-Density Puff Print", surcharge: 400, desc: "Raised tactile ink for premium streetwear depth" },
+  { id: "embroidered", name: "Tailored Satin Embroidery", surcharge: 600, desc: "High-density satin stitching with metallic threads" },
+  { id: "dtg", name: "High-Res Direct Graphic (DTG)", surcharge: 150, desc: "Full-color photo-realistic ink fusion" }
 ];
 
 interface LiveCanvasEditorProps {
@@ -147,19 +147,19 @@ export const LiveCanvasEditor: React.FC<LiveCanvasEditorProps> = ({ onSubmit }) 
 
   // Calculate dynamic pricing
   const getPrices = () => {
-    let basePrice = 35.00;
-    if (garmentType === "Hoodie") basePrice = 65.00;
-    if (garmentType === "Oversized T-Shirt") basePrice = 42.00;
+    let basePrice = 2900;
+    if (garmentType === "Hoodie") basePrice = 5400;
+    if (garmentType === "Oversized T-Shirt") basePrice = 3500;
 
     const method = FINISH_METHODS.find(m => m.id === finishMethod);
     const finishSurcharge = method ? method.surcharge : 0;
 
     // Graphic surcharge (if both sides or premium graphics added)
     let graphicSurcharge = 0;
-    if (frontLogo) graphicSurcharge += 5.00;
-    if (backLogo) graphicSurcharge += 5.00;
-    if (frontText) graphicSurcharge += 2.00;
-    if (backText) graphicSurcharge += 2.00;
+    if (frontLogo) graphicSurcharge += 400;
+    if (backLogo) graphicSurcharge += 400;
+    if (frontText) graphicSurcharge += 150;
+    if (backText) graphicSurcharge += 150;
 
     const pricePerUnit = basePrice + finishSurcharge + graphicSurcharge;
     const totalQty = Object.values(quantities).reduce((a, b) => a + b, 0);
@@ -571,7 +571,7 @@ export const LiveCanvasEditor: React.FC<LiveCanvasEditorProps> = ({ onSubmit }) 
                         >
                           <span className="font-semibold block truncate w-full">{type}</span>
                           <span className="text-[8px] text-foreground/50 lowercase font-light">
-                            {type === "Hoodie" ? "$65.00" : type === "T-Shirt" ? "$35.00" : "$42.00"}
+                            {type === "Hoodie" ? "₹5,400" : type === "T-Shirt" ? "₹2,900" : "₹3,500"}
                           </span>
                         </button>
                       ))}
@@ -957,7 +957,7 @@ export const LiveCanvasEditor: React.FC<LiveCanvasEditorProps> = ({ onSubmit }) 
                           <p className="text-[9px] text-foreground/60 leading-relaxed font-light">{method.desc}</p>
                         </div>
                         <span className="text-[10px] font-bold text-gold tracking-widest whitespace-nowrap font-mono">
-                          {method.surcharge === 0 ? "Standard" : `+$${method.surcharge.toFixed(2)}`}
+                          {method.surcharge === 0 ? "Standard" : `+₹${method.surcharge.toLocaleString('en-IN')}`}
                         </span>
                       </div>
                     ))}
@@ -1001,7 +1001,7 @@ export const LiveCanvasEditor: React.FC<LiveCanvasEditorProps> = ({ onSubmit }) 
                       </div>
                       <div className="p-3.5 bg-card-bg/25 border border-card-border rounded-xl text-[10px] font-light leading-relaxed text-foreground/70 text-left space-y-1.5">
                         <p><strong>Design:</strong> {garmentType} ({garmentColor})</p>
-                        <p><strong>Total Units:</strong> {prices.qty} (Estimated total: ${prices.total.toFixed(2)})</p>
+                        <p><strong>Total Units:</strong> {prices.qty} (Estimated total: ₹{prices.total.toLocaleString('en-IN')})</p>
                         <p><strong>Status:</strong> Assigned to Personal Designer (Review within 2 hrs)</p>
                         <p><strong>Contact:</strong> {shippingDetails.email}</p>
                       </div>
@@ -1146,26 +1146,26 @@ export const LiveCanvasEditor: React.FC<LiveCanvasEditorProps> = ({ onSubmit }) 
             <div className="border-t border-card-border pt-5 mt-6 space-y-3.5">
               <div className="flex justify-between items-center text-[10px] uppercase font-mono tracking-wider">
                 <span className="text-foreground/50">Base Silhouette Price</span>
-                <span className="font-semibold text-foreground">${prices.base.toFixed(2)}</span>
+                <span className="font-semibold text-foreground">₹{prices.base.toLocaleString('en-IN')}</span>
               </div>
               
               {prices.finish > 0 && (
                 <div className="flex justify-between items-center text-[10px] uppercase font-mono tracking-wider">
                   <span className="text-foreground/50">Print Finish Premium</span>
-                  <span className="font-semibold text-gold">+${prices.finish.toFixed(2)}</span>
+                  <span className="font-semibold text-gold">+₹{prices.finish.toLocaleString('en-IN')}</span>
                 </div>
               )}
 
               {prices.graphics > 0 && (
                 <div className="flex justify-between items-center text-[10px] uppercase font-mono tracking-wider">
                   <span className="text-foreground/50">Branding / Graphics Fee</span>
-                  <span className="font-semibold text-gold">+${prices.graphics.toFixed(2)}</span>
+                  <span className="font-semibold text-gold">+₹{prices.graphics.toLocaleString('en-IN')}</span>
                 </div>
               )}
 
               <div className="flex justify-between items-center text-[10px] uppercase font-mono tracking-wider pt-2 border-t border-dashed border-card-border">
                 <span className="text-foreground/60 font-bold">Estimated Unit Price</span>
-                <span className="font-bold text-foreground">${prices.unit.toFixed(2)}</span>
+                <span className="font-bold text-foreground">₹{prices.unit.toLocaleString('en-IN')}</span>
               </div>
 
               <div className="flex justify-between items-center text-xs uppercase font-mono tracking-widest pt-2 border-t border-card-border">
@@ -1174,7 +1174,7 @@ export const LiveCanvasEditor: React.FC<LiveCanvasEditorProps> = ({ onSubmit }) 
                   Final Custom Total
                 </span>
                 <span className="text-lg font-bold text-foreground">
-                  ${prices.total.toFixed(2)} <span className="text-[8px] text-foreground/50 font-normal">({prices.qty} units)</span>
+                  ₹{prices.total.toLocaleString('en-IN')} <span className="text-[8px] text-foreground/50 font-normal">({prices.qty} units)</span>
                 </span>
               </div>
 

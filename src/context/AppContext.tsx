@@ -174,7 +174,7 @@ const initialProducts: Product[] = [
     id: "p1",
     title: "Tantura Signature Oversized Hoodie",
     description: "Crafted from ultra-heavyweight 450GSM French terry cotton. Featuring a custom boxy fit, dropped shoulders, double-layered hood without drawstrings for a clean luxury look, and subtle embroidered Tantura logo on the chest. Designed to drape perfectly.",
-    price: 180,
+    price: 14900,
     category: "Hoodies",
     images: [
       "https://images.unsplash.com/photo-1556911220-e15b29be8c8f?auto=format&fit=crop&q=80&w=800",
@@ -202,7 +202,7 @@ const initialProducts: Product[] = [
     id: "p2",
     title: "Eclipse Utility Cargo Jacket",
     description: "Technical street-style cargo jacket made from a water-resistant ripstop nylon shell. Features matte black hardware, gold zipper accents, six utility multi-pockets, and adjustable strap sleeves. Fully lined with breathable premium mesh.",
-    price: 320,
+    price: 26500,
     category: "Jackets",
     images: [
       "https://images.unsplash.com/photo-1551028719-00167b16eac5?auto=format&fit=crop&q=80&w=800",
@@ -227,7 +227,7 @@ const initialProducts: Product[] = [
     id: "p3",
     title: "Minimalist Mulberry Silk Shirt",
     description: "Flowing luxury relaxed-fit button-down shirt tailored from 100% pure Mulberry Silk. Clean hidden placket, structured collar, and mother-of-pearl buttons. Provides an extremely smooth, premium feel with a subtle natural sheen.",
-    price: 240,
+    price: 19900,
     category: "Shirts",
     images: [
       "https://images.unsplash.com/photo-1596755094514-f87e34085b2c?auto=format&fit=crop&q=80&w=800",
@@ -250,7 +250,7 @@ const initialProducts: Product[] = [
     id: "p4",
     title: "Heavyweight Studio Box Tee",
     description: "Premium Box Tee woven from 320GSM heavy carded cotton. Strict ribbed high mock-neck collar, wide sleeves, and dropped shoulders. Features a structured drape that stays clean and resists wrinkling.",
-    price: 85,
+    price: 7000,
     category: "T-Shirts",
     images: [
       "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&q=80&w=800",
@@ -274,7 +274,7 @@ const initialProducts: Product[] = [
     id: "p5",
     title: "Fallen Angel Distressed Tee",
     description: "Vintage-washed graphic t-shirt featuring a detailed Renaissance-inspired fallen angel print on the back. Acid-washed treatment gives a worn grey tint with carefully placed distressed micro-tears on the hem and collar.",
-    price: 95,
+    price: 7900,
     category: "T-Shirts",
     images: [
       "https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?auto=format&fit=crop&q=80&w=800",
@@ -296,7 +296,7 @@ const initialProducts: Product[] = [
     id: "p6",
     title: "Tantura Knit Cashmere Sweater",
     description: "Luxurious heavy knit sweater crafted from an premium blend of 30% organic Cashmere and 70% Extra Fine Merino Wool. Clean dropped shoulder, structured rib knit cuffs and bottom band, and an elegant small gold emblem plate at the back collar.",
-    price: 280,
+    price: 23000,
     category: "Designer Collection",
     images: [
       "https://images.unsplash.com/photo-1614975058789-41316d0e2e9c?auto=format&fit=crop&q=80&w=800",
@@ -319,7 +319,7 @@ const initialProducts: Product[] = [
     id: "p7",
     title: "Tantura Limitless Hooded Cloak",
     description: "A showpiece streetwear accessory featuring a draped aesthetic. Engineered with double-face wool jersey, asymmetrical front wrap, deep oversized hood, and raw clean-cut edges. Perfect for avant-garde layering.",
-    price: 380,
+    price: 31500,
     category: "Limited Edition",
     images: [
       "https://images.unsplash.com/photo-1544441893-675973e31985?auto=format&fit=crop&q=80&w=800"
@@ -414,7 +414,7 @@ const initialDesignRequests: DesignRequest[] = [
     notes: "I want an oversized black hoodie with a gold metallic Japanese calligraphy design on the back and a small gold Tantura monogram on the left chest.",
     canvasState: "",
     mockupUrl: "https://images.unsplash.com/photo-1556821840-3a63f95609a7?auto=format&fit=crop&q=80&w=800",
-    price: 210,
+    price: 17430,
     status: "quote_sent",
     assignedDesignerId: "d1",
     designerName: "Sophia Carter",
@@ -457,7 +457,7 @@ const initialChatMessages: ChatMessage[] = [
     senderId: "d1",
     senderName: "Sophia Carter",
     senderRole: "designer",
-    text: "I have also calculated the custom pricing sheet. The base 450GSM hoodie + detailed gold metallic embroidery work on both chest and back comes out to $210 total. You can review the quotation, let me know if we need adjustments, or click Approve Quote to begin production!",
+    text: "I have also calculated the custom pricing sheet. The base 450GSM hoodie + detailed gold metallic embroidery work on both chest and back comes out to ₹17,430 total. You can review the quotation, let me know if we need adjustments, or click Approve Quote to begin production!",
     timestamp: "2026-07-01T17:18:00Z"
   }
 ];
@@ -850,9 +850,9 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     setOrders(updated);
     saveToLocal("aj_orders", updated);
 
-    // Give loyalty reward points (1 point per $10 spent)
+    // Give loyalty reward points (1 point per ₹800 spent)
     if (user) {
-      const earnedPoints = Math.floor(cartTotal / 10);
+      const earnedPoints = Math.floor(cartTotal / 800);
       const newPoints = user.loyaltyPoints + earnedPoints;
       
       // Tier upgrades

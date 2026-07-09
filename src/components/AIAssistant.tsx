@@ -179,7 +179,7 @@ export const AIAssistant: React.FC = () => {
                               </div>
                               <div className="flex-1 min-w-0">
                                 <p className="text-[10px] text-foreground font-semibold uppercase truncate">{prod.title}</p>
-                                <p className="text-[10px] text-gold font-bold mt-0.5">${prod.price}</p>
+                                <p className="text-[10px] text-gold font-bold mt-0.5">₹{prod.price.toLocaleString('en-IN')}</p>
                               </div>
                               <ChevronRight className="w-4 h-4 text-gold" />
                             </Link>
